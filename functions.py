@@ -1,9 +1,10 @@
 import os, time
 
-DATA_FILE = 'data.txt'
+DATA_FILE = '/home/rdubar/projects/todo-app/data.txt'
 
 def get_data_index(data, x):
     """ Return the index of an item in list given a number, or text to search for in the list """
+    print(123,type(x), x)
     if type(x) == str: x = x.strip()
     if x.isdigit():
         return int(x) - 1
