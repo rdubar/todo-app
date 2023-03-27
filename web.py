@@ -5,6 +5,18 @@ import functions
 /home/rdubar/.p311/bin/streamlit run /home/rdubar/projects/todo-app/web.py
 """
 
+def add_todo():
+    new = st.session_state['new_todo']
+    print(new)
+    if not new: return
+    data = functions.load_data()
+    while new in data:
+        new = new + ' '
+    data.append(new)
+    functions.save_data(data)
+    st.session_state["new_todo"] = ""
+
+
 todos = functions.load_data()
 
 
@@ -16,4 +28,6 @@ for todo in todos:
     st.checkbox(todo)
 
 
-st.text_area(label="Input", placeholder="Add a new todo...", label_visibility='hidden')
+
+st.text_input(label="Input", placeholder="Add a new todo...", label_visibility='hidden',
+             on_change=add_todo, key='new_todo')
